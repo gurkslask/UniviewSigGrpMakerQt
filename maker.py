@@ -26,37 +26,57 @@ def remove_chars_from_string(string_list):
     resultin_dict = dict(resultin_dict)
     return resultin_dict
 
+def make_len_func(first_number, last_number, digital_data):
+    '''
+    calculates the length of the data, makes it dividible by 16 if digital data
+    :param first_number: int
+    :param last_number:int
+    :param digital_data:bool
+    :return len_of data: int
+    '''
+    if digital_data:
+        first_number = make_div_by_sixteen_dec(first_number)
+        len_of_data = make_div_by_sixteen(last_variable - first_number)
+    elif not digital_data:
+        len_of_data = last_variable - first_number
+    return len_of_data
 
 def find_intervals_in_variables(dict_with_variable):
     '''
     Make a variable list
     '''
+    digital_data_types = ['CR']
+    analog_data_types = ['MO', 'AI']
     for variables in dict_with_variable:
+        if variables in digital_data_types:
+            digital_data = True
+            print('here comes a dig')
+        elif variables in analog_data_types:
+            digital_data = False
+            print('here comes a ana')
         dict_with_variable[variables].sort()
         interval = 32
         last_variable = dict_with_variable[variables][0]
         first_number = dict_with_variable[variables][0]
         resulting_list = []
-        length = 1
         for variable in dict_with_variable[variables]:
             if variable - last_variable > interval:
                 # If interval is big enough, add it to the list
+                len_of_data = make_len_func(first_number, last_variable, digital_data)
                 resulting_list.append(adress_register(
                     first_number,
-                    make_div_by_sixteen(last_variable - first_number)
+                    len_of_data
                     ))
                 first_number = variable
-                length = 0
             last_variable = variable
-            length += 1
+        len_of_data = make_len_func(first_number, last_variable, digital_data)
         # Add the trailing last numbers too
-        first_number_temp = first_number
-        first_number = make_div_by_sixteen_dec(first_number)
         resulting_list.append(adress_register(
             first_number,
-            make_div_by_sixteen(last_variable - first_number)
+            len_of_data
             ))
         dict_with_variable[variables] = resulting_list
+        print(dict_with_variable)
     return dict_with_variable
 
 

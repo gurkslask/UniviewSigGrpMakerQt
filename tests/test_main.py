@@ -21,9 +21,9 @@ class test_find_intervals(unittest.TestCase):
                 adress_register(128, 16)
             ],
             'AI': [
-                adress_register(1, 32),
-                adress_register(64, 16),
-                adress_register(256, 32),
+                adress_register(1, 19),
+                adress_register(64, 1),
+                adress_register(256, 3),
             ]
         }
 
