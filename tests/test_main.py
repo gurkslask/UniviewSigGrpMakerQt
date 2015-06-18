@@ -3,7 +3,7 @@ __author__ = 'alexander'
 import unittest
 from maker import find_intervals_in_variables,\
     remove_chars_from_string, make_output_file, adress_register,\
-    make_div_by_sixteen
+    make_div_by_sixteen, make_div_by_sixteen_dec
 
 
 class test_find_intervals(unittest.TestCase):
@@ -75,6 +75,28 @@ class test_make_it_div_by_sixteen(unittest.TestCase):
         self.assertEqual(make_div_by_sixteen(self.testcase1), self.testcase1_result)
         self.assertEqual(make_div_by_sixteen(self.testcase2), self.testcase2_result)
         self.assertEqual(make_div_by_sixteen(self.testcase3), self.testcase3_result)
+
+class test_make_it_div_by_sixteen_dec(unittest.TestCase):
+    def setUp(self):
+        self.testcase1 = 49
+        self.testcase1_result = 64 - 16
+        self.testcase2 = 127
+        self.testcase2_result = 128 - 16
+        self.testcase3 = 256
+        self.testcase3_result = 256
+
+    def test_output(self):
+        self.assertEqual(make_div_by_sixteen_dec(self.testcase1), self.testcase1_result)
+        self.assertEqual(make_div_by_sixteen_dec(self.testcase2), self.testcase2_result)
+        self.assertEqual(make_div_by_sixteen_dec(self.testcase3), self.testcase3_result)
+
+class test_if_not_div_sixteen_change_len(unittest.TestCase):
+    def setUp(self):
+        self.testcase1 = {'CR': [200, 210, 230, 240, 250]}
+        self.testcase1_result = {'CR': [adress_register(192, 64)]}
+    def test_method(self):
+        result = find_intervals_in_variables(self.testcase1)
+        self.assertEqual(result, self.testcase1_result)
 
 if __name__ == '__main__':
     unittest.main()

@@ -50,6 +50,8 @@ def find_intervals_in_variables(dict_with_variable):
             last_variable = variable
             length += 1
         # Add the trailing last numbers too
+        first_number_temp = first_number
+        first_number = make_div_by_sixteen_dec(first_number)
         resulting_list.append(adress_register(
             first_number,
             make_div_by_sixteen(last_variable - first_number)
@@ -93,6 +95,11 @@ def make_div_by_sixteen(an_int):
         temp_int += 16
     return max(temp_int, 16)
 
+def make_div_by_sixteen_dec(an_int):
+    temp_int = 0
+    while an_int - 15 > temp_int:
+        temp_int += 16
+    return max(temp_int, 16)
 
 def maker_main(argv):
     try:
