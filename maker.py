@@ -36,9 +36,9 @@ def make_len_func(first_number, last_number, digital_data):
     '''
     if digital_data:
         first_number = make_div_by_sixteen_dec(first_number)
-        len_of_data = make_div_by_sixteen(last_variable - first_number)
+        len_of_data = make_div_by_sixteen(last_number - first_number)
     elif not digital_data:
-        len_of_data = last_variable - first_number
+        len_of_data = last_number- first_number
     return len_of_data
 
 def find_intervals_in_variables(dict_with_variable):
@@ -50,10 +50,8 @@ def find_intervals_in_variables(dict_with_variable):
     for variables in dict_with_variable:
         if variables in digital_data_types:
             digital_data = True
-            print('here comes a dig')
         elif variables in analog_data_types:
             digital_data = False
-            print('here comes a ana')
         dict_with_variable[variables].sort()
         interval = 32
         last_variable = dict_with_variable[variables][0]
