@@ -132,5 +132,5 @@ def maker_main(argv):
 
 if __name__ == '__main__':
     # first arg CSV file, second arg output file
-    main(sys.argv)
+    maker_main(sys.argv)
 
